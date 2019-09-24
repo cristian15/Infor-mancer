@@ -13,7 +13,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
     next();
 });
-// Body Parser  para recivir JSON desde las peticiones
+// Body Parser  para recibir JSON desde las peticiones
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -44,5 +44,5 @@ mongoose.connect(config.URL_MONGO,{     // conecta al Servidor con la direccion 
 
 const puerto = process.env.PORT || config.PUERTO;
 httpServer.listen(puerto, () => {
-    console.log('\x1b[32m%s\x1b[0m', 'HTTP Server running on port 80');
+    console.log('\x1b[32m%s\x1b[0m', 'HTTP Server running on port '+puerto);
 });

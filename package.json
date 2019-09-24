@@ -4,6 +4,8 @@
   "description": "Servidor de Proyecto Fichca Clinica Dinamica, NodeJS, Express, Mongoose",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
+    "serve": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Infor-mancer",

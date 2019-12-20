@@ -7,6 +7,7 @@ const usuarioSchema = new Schema({ // datos de objeto usuario permitidos
     email: { type: String, unique: true, required: [true, "El email es obligatorio"] },
     password: { type: String, required: [true, "La contraseña es obligatoria"] },
     token2FA: { type: String, default: '' },
+    imagen: { type: String, default: 'nofoto.png' },
     Activo2FA: { type: Boolean, default: false },
     activo: { type: Boolean, default: false },
     roles: []

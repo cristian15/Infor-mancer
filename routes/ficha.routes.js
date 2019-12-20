@@ -7,7 +7,7 @@ let Paciente = require('../models/paciente.model');//llamado del modelo paciente
 let mdVerificaToken = require('../middlewares/auth');//middleware de autenticacion (seguridad)
 
 
-//Busqueda de los datos del fichas
+//Busqueda de los datos de la ficha
 app.get('/',mdVerificaToken.verificaToken,(req,res) => {
     Ficha.find()
         .populate({path:'paciente', model: Paciente})
@@ -20,11 +20,13 @@ app.get('/',mdVerificaToken.verificaToken,(req,res) => {
 //Guardado en DB
 app.post('/',mdVerificaToken.verificaToken,(req,res)=>{
     let body = req.body
+    console.log(body);
     let ficha = new Ficha({
         folio:body.folio,
         paciente: body.paciente,
         fecha_ingreso:body.fecha_ingreso,
-        arquetipos: body.arquetipos
+        arquetipos: body.arquetipos,
+        last_update: body.last_update
     });
     ficha.save((err, newFicha)=>{
         if (err){
@@ -70,6 +72,7 @@ app.post('/paciente',mdVerificaToken.verificaToken,(req,res)=>{
 
 app.put('/:id',mdVerificaToken.verificaToken,(req,res)=>{
     let ficha_new = req.body
+    ficha_new.last_update = new Date();
     Ficha.findOneAndUpdate({_id:req.params.id},
         ficha_new,
         {new: true},
@@ -77,6 +80,32 @@ app.put('/:id',mdVerificaToken.verificaToken,(req,res)=>{
             if (err) res.status(400).json(err)
             res.status(200).json(fichanueva)
         })
+});
+app.post('/fichas',mdVerificaToken.verificaToken,(req,res)=>{
+    let fichas = req.body.fichas
+    for(let f of fichas){
+        Ficha.findOne({'_id': f._id})
+        .exec((err,ficha)=>{
+            if (err){res.status(400).json({err:err})}
+            if(new Date(ficha.last_update)<new Date(f.last_update)){        // actualiza si hubieron cambios (ultima actualizacion)
+                console.log("Actrualiza!!!!!", f._id); 
+                ficha.last_update = f.last_update;
+                ficha.arquetipos = f.arquetipos;
+                ficha.save((erro, newficha)=>{
+                    if (erro){
+                        return res.status(400).json({
+                            ok: false,
+                            err: err
+                        });
+                    }
+                    return res.status(201).json({
+                        ok: true,
+                        paciente: newficha
+                    })
+                });
+            }
+        })
+    }
 });
 
 //busqueda paciente
@@ -102,10 +131,8 @@ app.get('/rut/:rut',mdVerificaToken.verificaToken,(req,res)=>{
         .populate( {path:'paciente',model:Paciente})
         .exec((err,fichas)=>{
             if (err){res.status(400).json({err:err})}
-            let ficha = fichas.filter(f =>f.paciente.rut == req.params.rut);  
-                      
-            res.status(200).jsonp(ficha[0])
-            
+            let ficha = fichas.filter(f =>f.paciente.rut == req.params.rut);                        
+            res.status(200).jsonp(ficha[0])            
         })
 });
 

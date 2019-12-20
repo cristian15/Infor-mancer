@@ -15,6 +15,7 @@ app.post('/', (req, res) => {
     let usuario = new Usuario({
         nombre: body.nombre,
         email: body.email,
+        imagen: body.imagen,
         password: bcrypt.hashSync(body.password, 10),
     });
     usuario.save((err, newUsuario) => {
@@ -54,12 +55,15 @@ app.post('/cambia_password',mdVerificaToken.verificaToken , (req, res) => {
 
 // Actualizar Usuario
 app.put('/', mdVerificaToken.verificaToken, (req, res) => {
+
+    console.log(req.body);
     let newUsuario = {      // crea un nuevo usuario para ejecutar los cambios
         nombre: req.body.nombre,
         token2FA: req.body.token2FA,
         Activo2FA: req.body.Activo2FA,
         activo: req.body.activo,
-        roles: req.body.roles
+        roles: req.body.roles,
+        imagen: req.body.imagen
     };
     Usuario.findOneAndUpdate({_id: req.body._id},    // busca el usuario por el id recibido de la validacion del token
         newUsuario,         // datos del usuario por actualizar

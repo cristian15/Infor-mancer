@@ -1,0 +1,73 @@
+<div class="container-fluid">
+        <h3 class="text-dark mb-4">Perfil</h3>
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/images/profile.jpg" width="160" height="160">
+                        <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Cambiar Imagen</button></div>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-lg-8">               
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 font-weight-bold">Configuración de Usuario</p>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group"><label for="username"><strong>Nombre</strong></label><input [(ngModel)]="usuario.nombre" class="form-control" type="text" name="nombre"></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group"><label for="email"><strong>Email</strong></label><input class="form-control" [(ngModel)]="usuario.email" [disabled]="true" type="email" name="email"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        
+                                    </div>
+                                    <div class="form-group"><button (click)="guardarDatos()" class="btn btn-primary btn-sm" type="submit">Guardar</button></div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 font-weight-bold">Seguridad</p>
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="passwordForm" (ngSubmit)="cambiaPassword()">
+                                    <div class="form-row">
+                                        <div class="col-4">
+                                            <div class="form-group"><label for="username"><strong>Contraseña Antigua</strong></label><input formControlName="password" class="form-control" type="password"></div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group"><label  for="email"><strong>Nueva Contraseña</strong></label><input formControlName="password_nueva" class="form-control" type="password"></div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group"><label for="email"><strong>Confirmar Contraseña</strong></label><input formControlName="password_confirma" class="form-control" type="password"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><button [disabled]="passwordForm.invalid" class="btn btn-primary btn-sm" type="submit" >Guardar</button></div>
+                                </form>
+                                <h4>Autenticación de 2 Factores</h4>
+                                <hr>
+                                <div class="form-row">
+                                    <button *ngIf="!usuario.Activo2FA" class="btn btn-success btn-sm" [routerLink]="['/configuracion_dos_factores']" >Configurar</button>
+                                    <button *ngIf="usuario.Activo2FA" class="btn btn-danger btn-sm"  [routerLink]="['/configuracion_dos_factores']" >Deshabilitar</button>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>

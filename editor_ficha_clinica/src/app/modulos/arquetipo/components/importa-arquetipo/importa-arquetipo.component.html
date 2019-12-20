@@ -1,0 +1,24 @@
+<!-- <div class="custom-file">
+    <input type="file" class="custom-file-input" id="validatedCustomFile" (change)="sube($event)" required>
+    <label class="custom-file-label" for="validatedCustomFile">Examinar...</label>
+    <button class="btn btn-primary" (click)="subir()">Subir Arquetipo</button>
+</div> -->
+
+<div class="input-group">
+  
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".xml,.adl,.json"
+    aria-describedby="inputGroupFileAddon01" (change)="sube($event)" >
+    <label *ngIf="!archivo" class="custom-file-label" for="inputGroupFile01">Seleccionar Archivo ...</label>
+    <label *ngIf="archivo" class="custom-file-label" for="inputGroupFile01">{{archivo.name}} </label>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-10">
+    <input type="text" class="form-control" [(ngModel)]="arquetipo.nombre" name="nombre" placeholder="Nombre de Arquetipo" required>
+  </div>
+  <div class="col-2">
+    <button class="btn btn-primary" type="submit" (click)="subir()">Subir Arquetipo</button>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UsuarioService } from './modulos/usuario/services/usuario.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ficha-clinica';
+
+  constructor(public _usuarioService: UsuarioService){
+
+  }
 }

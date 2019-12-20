@@ -1,0 +1,13 @@
+<!-- <input type="text" [(ngModel)]="ficha.folio">
+<input type="date" [(ngModel)]="ficha.fecha_ingreso">
+<button (click)="ModificarFicha()">Modificar</button> -->
+
+<div class="col-sm-9" >
+    <button (click)="ModificarFicha()" class="btn btn-primary" >Actualizar Ficha</button>
+</div> 
+Usuario Ingresa:<input class="form-control" type="text" [(ngModel)]="usuario" disabled>
+<hr>
+<div *ngFor="let a of arquetipo.campos">
+    {{a.nombre | titlecase}}: <input class="form-control" type="text" [(ngModel)]="a.valor" required>            
+</div>
+

@@ -1,0 +1,52 @@
+<div class="card mb-3" style="max-width: 80rem;">
+      <div class="card-body">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Nombre:</label>
+          <div class="col-sm-4">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.nombre">
+          </div>
+          <label class="col-sm-2 col-form-label">Dirección:</label>
+          <div class="col-sm-4">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.direccion">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">RUT:</label>
+          <div class="col-sm-4">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.rut">
+          </div>
+          <label class="col-sm-2 col-form-label">Previsión:</label>
+          <div class="col-sm-4">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.prevision">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Fecha de Nacimiento:</label>
+          <div class="col-sm-4">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.fecha_nacimiento">
+          </div>
+          <label class="col-sm-2 col-form-label">Telefono:</label>
+          <div class="col-sm-4">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.fono">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Estatura:</label>
+          <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.estatura_paciente">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Género:</label>
+          <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.genero">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Grupo Sanguineo:</label>
+          <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" [value]="ficha.paciente.grupo_sangre + ' ' + ficha.paciente.rh">
+          </div>
+        </div>
+      </div>
+</div>

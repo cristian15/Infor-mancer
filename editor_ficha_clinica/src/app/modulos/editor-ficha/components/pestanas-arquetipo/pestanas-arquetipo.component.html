@@ -1,0 +1,7 @@
+<mat-tab-group>
+    <div *ngFor="let arquetipo of ficha.arquetipos">
+        <mat-tab label="{{arquetipo.nombre}}">
+            <app-editor-arquetipos [ficha]="ficha" [arquetipo]="arquetipo"></app-editor-arquetipos>
+        </mat-tab>
+    </div>
+</mat-tab-group>

@@ -1,0 +1,66 @@
+<div *ngIf="!password_confirmada" class="card shadow mx-auto" style="width: 18rem">
+    <div class="card-header">
+        <p class="text-primary font-weight-bold">Confirmar Contraseña</p>
+    </div>
+    <div class="card-body justify-content-center">
+        <form #formConfirmar="ngForm" (ngSubmit)="confirmarPassword(formConfirmar.value)" class="justify-content-center">
+            <div class="form-row justify-content-center">
+                <div class="col-12">
+                    <div class="form-group"><input class="form-control" type="password" name="password" ngModel></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group mx-auto"><button class="btn btn-primary btn-sm" type="submit">Aceptar</button></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="password_confirmada&&!usuario.Activo2FA" class="card shadow mx-auto">
+    <div class="card-header">
+        <p class="text-primary font-weight-bold">Configuración Autenticación 2 Factores</p>
+    </div>
+    <div class="card-body justify-content-center mx-auto">
+        <p>Escanea el codigo con la aplicación de Autenticación de 2 Factores</p>
+        <form #formConfirmar2FA="ngForm" (ngSubmit)="confirmar2FA(formConfirmar2FA.value)" class="justify-content-center">
+            <div class="form-row justify-content-center">
+                <div class="col-12">
+                        <ngx-qrcode
+                        [qrc-value] = "url2FA"
+                        qrc-class = "aclass">
+                    </ngx-qrcode>
+                </div>
+            </div>
+            <div class="form-row justify-content-center">
+                <div class="col-12">
+                    <div class="form-group"><label for="username"><strong>Codigo de Confirmación</strong></label><input class="form-control" type="text" name="codigo" ngModel></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group mx-auto"><button class="btn btn-primary btn-sm" type="submit">Verificar</button></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div  *ngIf="password_confirmada&&usuario.Activo2FA">
+        <div class="card-body justify-content-center mx-auto">
+            <div class="card-body">
+
+                <form #formDesactivar2FA="ngForm" (ngSubmit)="desactivar2FA(formDesactivar2FA.value)" class="justify-content-center">
+                        <div class="alert alert-danger" role="alert">
+                            Desactivar la Autenticación de 2 Factores!
+                        </div>
+                    
+                    <div class="form-row justify-content-center">
+                        <div class="col-4">
+                            <div class="form-group"><label for="username"><strong>Codigo de Confirmación</strong></label><input class="form-control" type="text" name="codigo" ngModel></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group mx-auto"><button class="btn btn-danger btn-sm" type="submit">Desactivar</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
